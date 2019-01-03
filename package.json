@@ -1,10 +1,10 @@
 {
   "name": "counterup2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Counter-Up2 is a lightweight module that counts up to a targeted number when the number becomes visible.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "parcel build index.js --no-cache --no-source-maps --target node",
+    "build": "webpack --config ./webpack.config.js",
     "test": "jest"
   },
   "repository": {
@@ -30,10 +30,15 @@
   },
   "homepage": "https://github.com/bfintal/Counter-Up2#readme",
   "devDependencies": {
-    "babel-core": "^6.26.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
-    "babel-preset-env": "^1.7.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "jest": "^23.6.0",
-    "parcel-bundler": "^1.11.0"
-  }
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0"
+  },
+  "dependencies": {}
 }
