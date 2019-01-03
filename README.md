@@ -3,6 +3,16 @@ Counter-Up is a lightweight module that counts up to a targeted number when the 
 
 An improvement to https://github.com/bfintal/Counter-Up
 
+### What Can You Count Up?
+
+* Floats: `1.234`
+* Integers: `1234`
+* With commas: `1,234.56`
+* With non-numeric characters: `$1,234.56`
+* Multiple countable values: `604,800 seconds in 10,080 minutes in 168 hours in 7 days`
+
+### Usage
+
 **Install**
 ```bash
 npm install --save counterup2
@@ -31,4 +41,21 @@ If you want to stop the counter immediately:
 ```js
 // Stop counting. This brings back the original value.
 counterUp( el, { action: 'stop' } )
+```
+
+### Use with Waypoints
+
+The counting is performed when `counterUp` is called. To make the counting start when the element becomes visible, use a visibility library like [Waypoints](https://www.npmjs.com/package/waypoints)
+
+For example:
+
+```js
+// On DOM ready.
+require( 'waypoints/lib/noframework.waypoints.js' )
+const el = document.querySelector( '.counter' )
+new Waypoint( {
+    element: el,
+    handler: () => { counterUp( el ) },
+    offset: 'bottom-in-view',
+} )
 ```
