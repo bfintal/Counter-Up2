@@ -1,0 +1,39 @@
+{
+  "name": "counterup2",
+  "version": "1.0.0",
+  "description": "Counter-Up2 is a lightweight module that counts up to a targeted number when the number becomes visible.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "parcel build index.js --no-cache --no-source-maps --target node",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bfintal/Counter-Up2.git"
+  },
+  "keywords": [
+    "counterup",
+    "counter-up",
+    "count-up",
+    "count",
+    "number",
+    "counter",
+    "stats",
+    "countup"
+  ],
+  "author": "Benjamin Intal",
+  "email": "bfintal@gmail.com",
+  "url": "https://benjaminintal.com",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/bfintal/Counter-Up2/issues"
+  },
+  "homepage": "https://github.com/bfintal/Counter-Up2#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.6.0",
+    "parcel-bundler": "^1.11.0"
+  }
+}
