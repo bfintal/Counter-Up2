@@ -1,6 +1,6 @@
 {
   "name": "counterup2",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Counter-Up2 is a lightweight module that counts up to a targeted number when the number becomes visible.",
   "main": "dist/index.js",
   "scripts": {
