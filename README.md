@@ -28,6 +28,9 @@ npm install --save counterup2
 ```
 
 **JS**
+
+Importing as a module will import the modern JavaScript code.
+
 ```js
 import counterUp from 'counterup2'
 
