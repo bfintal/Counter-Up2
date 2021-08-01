@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/bfintal/Counter-Up2.svg?branch=master)](https://travis-ci.org/bfintal/Counter-Up2)
 
-Counter-Up is a lightweight module that counts up to a targeted number when the number becomes visible.
+Counter-Up is a lightweight module with zero dependencies that counts up to a targeted number when the number becomes visible.
 
 An improvement to https://github.com/bfintal/Counter-Up
 
@@ -11,6 +11,7 @@ An improvement to https://github.com/bfintal/Counter-Up
 * Floats: `1.234`
 * Integers: `1234`
 * With commas: `1,234.56`
+* Commas and dots: `12.345,67`
 * With non-numeric characters: `$1,234.56`
 * Multiple countable values: `604,800 seconds in 10,080 minutes in 168 hours in 7 days`
 

@@ -3,7 +3,6 @@ const counterUp = ( el, options = {} ) => {
 		action = 'start',
 		duration = 1000,
 		delay = 16,
-		lang = undefined,
 	} = options
 
 	// Allow people to use this as a stop method.
@@ -21,7 +20,6 @@ const counterUp = ( el, options = {} ) => {
 
 	const nums = divideNumbers( el.innerHTML, {
 		duration: duration || el.getAttribute( 'data-duration' ),
-		lang: lang || document.querySelector( 'html' ).getAttribute( 'lang' ) || undefined,
 		delay: delay || el.getAttribute( 'data-delay' ),
 	} )
 
@@ -60,7 +58,6 @@ export const divideNumbers = ( numToDivide, options = {} ) => {
 	const {
 		duration = 1000,
 		delay = 16,
-		lang = undefined,
 	} = options
 
 	// Number of times the number will change.
@@ -83,35 +80,28 @@ export const divideNumbers = ( numToDivide, options = {} ) => {
 		if ( /([0-9.][,.0-9]*[0-9]*)/.test( splitValues[ i ] ) && ! /<[^>]+>/.test( splitValues[ i ] ) ) {
 			let num = splitValues[ i ]
 
-			// Test if numbers have comma.
-			const isComma = /[0-9]+,[0-9]+/.test( num )
+			// Find all the occurances of . and ,
+			const symbols = [ ...num.matchAll( /[.,]/g ) ]
+				// Get all the locations of the characters so we can re-place them later on.
+				.map( m => ( { char: m[0], i: num.length - m.index - 1 } ) )
+				// Make sure we go through the characters from right to left
+				.sort( ( a, b ) => a.i - b.i )
 
-			// Remove comma for computation purposes.
-			num = num.replace( /,/g, '' )
-
-			// Test if values have point.
-			const isFloat = /^[0-9]+\.[0-9]+$/.test( num )
-
-			// Check number of decimals places.
-			const decimalPlaces = isFloat ? ( num.split( '.' )[ 1 ] || [] ).length : 0
+			// Remove commas and dots for computation purposes.
+			num = num.replace( /[.,]/g, '' )
 
 			// Start adding numbers from the end.
 			let k = nums.length - 1
 
-			// Create small numbers
+			// Create small numbers we'll the count over.
 			for ( let val = divisions; val >= 1; val-- ) {
 				let newNum = parseInt( num / divisions * val, 10 )
 
-				// If has decimal point, add it again.
-				if ( isFloat ) {
-					newNum = parseFloat( num / divisions * val ).toFixed( decimalPlaces )
-					newNum = parseFloat( newNum ).toLocaleString( lang )
-				}
-
-				// If has comma, add it again.
-				if ( isComma ) {
-					newNum = newNum.toLocaleString( lang )
-				}
+				// Re-insert the symbols in the indices they were at.
+				newNum = symbols.reduce( ( num, { char, i } ) => {
+					return num.length <= i ? num // If we don't have enough numbers, don't insert the symbol.
+						: num.slice( 0, -i ) + char + num.slice( -i )
+				}, newNum.toString() )
 
 				// Insert all small numbers.
 				nums[ k-- ] += newNum
@@ -129,9 +119,3 @@ export const divideNumbers = ( numToDivide, options = {} ) => {
 
 	return nums
 }
-
-export const hasComma = num => /[0-9]+,[0-9]+/.test( num )
-
-export const isFloat = num => /^[0-9]+\.[0-9]+$/.test( num )
-
-export const decimalPlaces = num => isFloat( num ) ? ( num.split( '.' )[ 1 ] || [] ).length : 0
