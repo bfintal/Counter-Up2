@@ -1,17 +1,16 @@
 const counterUp = ( el, options = {} ) => {
+	const {
+		action = 'start',
+		duration = 1000,
+		delay = 16,
+		lang = undefined,
+	} = options
 
-    const { 
-        action = 'start', 
-        duration = 1000, 
-        delay = 16, 
-        lang = undefined 
-    } = options
-
-    // Allow people to use this as a stop method.
-    if ( action === 'stop' ) {
-        stopCountUp( el )
-        return
-    }
+	// Allow people to use this as a stop method.
+	if ( action === 'stop' ) {
+		stopCountUp( el )
+		return
+	}
 
 	stopCountUp( el )
 
@@ -20,16 +19,16 @@ const counterUp = ( el, options = {} ) => {
 		return
 	}
 
-    const nums = divideNumbers( el.innerHTML, { 
-        duration: duration || el.getAttribute( 'data-duration' ),
-        lang: lang || document.querySelector( 'html' ).getAttribute( 'lang' ) || undefined,
-        delay: delay || el.getAttribute( 'data-delay' ),
-    } )
+	const nums = divideNumbers( el.innerHTML, {
+		duration: duration || el.getAttribute( 'data-duration' ),
+		lang: lang || document.querySelector( 'html' ).getAttribute( 'lang' ) || undefined,
+		delay: delay || el.getAttribute( 'data-delay' ),
+	} )
 
 	// Remember the contents.
 	el._countUpOrigInnerHTML = el.innerHTML
 
-    // Start counting.
+	// Start counting.
 	el.innerHTML = nums[ 0 ]
 	el.style.visibility = 'visible'
 
@@ -49,27 +48,26 @@ const counterUp = ( el, options = {} ) => {
 export default counterUp
 
 const stopCountUp = el => {
-    clearTimeout( el.countUpTimeout )
-    if ( el._countUpOrigInnerHTML ) {
-        el.innerHTML = el._countUpOrigInnerHTML
-        el._countUpOrigInnerHTML = undefined
-    }
-    el.style.visibility = ''
+	clearTimeout( el.countUpTimeout )
+	if ( el._countUpOrigInnerHTML ) {
+		el.innerHTML = el._countUpOrigInnerHTML
+		el._countUpOrigInnerHTML = undefined
+	}
+	el.style.visibility = ''
 }
 
-export const divideNumbers = ( num, options = {} ) => {
-
-    const { 
-        duration = 1000, 
-        delay = 16, 
-        lang = undefined 
-    } = options
+export const divideNumbers = ( numToDivide, options = {} ) => {
+	const {
+		duration = 1000,
+		delay = 16,
+		lang = undefined,
+	} = options
 
 	// Number of times the number will change.
 	const divisions = duration / delay
 
 	// Split numbers and html tags.
-    const splitValues = num.toString().split( /(<[^>]+>|[0-9.][,.0-9]*[0-9]*)/ )
+	const splitValues = numToDivide.toString().split( /(<[^>]+>|[0-9.][,.0-9]*[0-9]*)/ )
 
 	// Contains all numbers to be displayed.
 	const nums = []
@@ -102,7 +100,7 @@ export const divideNumbers = ( num, options = {} ) => {
 
 			// Create small numbers
 			for ( let val = divisions; val >= 1; val-- ) {
-                let newNum = parseInt( num / divisions * val, 10 )
+				let newNum = parseInt( num / divisions * val, 10 )
 
 				// If has decimal point, add it again.
 				if ( isFloat ) {
@@ -127,9 +125,9 @@ export const divideNumbers = ( num, options = {} ) => {
 	}
 
 	// The last value of the element should be the original one.
-    nums[ nums.length ] = num.toString()
-    
-    return nums
+	nums[ nums.length ] = numToDivide.toString()
+
+	return nums
 }
 
 export const hasComma = num => /[0-9]+,[0-9]+/.test( num )

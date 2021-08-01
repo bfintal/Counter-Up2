@@ -3,6 +3,7 @@
   "version": "1.0.4",
   "description": "Counter-Up2 is a lightweight module that counts up to a targeted number when the number becomes visible.",
   "main": "dist/index.js",
+  "exports": "./index.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
     "test": "jest"
@@ -30,15 +31,30 @@
   },
   "homepage": "https://github.com/bfintal/Counter-Up2#readme",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
+    "@babel/core": "^7.14.8",
+    "@babel/plugin-proposal-object-rest-spread": "^7.14.7",
+    "@babel/preset-env": "^7.14.9",
+    "@wordpress/eslint-plugin": "^9.1.0",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^8.0.4",
-    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
-    "jest": "^23.6.0",
-    "webpack": "^4.28.3",
-    "webpack-cli": "^3.2.0"
+    "babel-jest": "^27.0.6",
+    "babel-loader": "^8.2.2",
+    "browserslist": "^4.16.6",
+    "eslint-plugin-compat": "^3.11.1",
+    "eslint-plugin-jest": "^24.4.0",
+    "jest": "^27.0.6",
+    "webpack": "^5.47.1",
+    "webpack-cli": "^4.7.2"
   },
-  "dependencies": {}
+  "browserslist": [
+    "> 1%",
+    "last 1 Android versions",
+    "last 1 ChromeAndroid versions",
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 iOS versions",
+    "last 2 Edge versions",
+    "last 2 Opera versions",
+    "not op_mini all"
+  ]
 }
