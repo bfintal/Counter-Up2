@@ -27,12 +27,12 @@ const counterUp = ( el, options = {} ) => {
 	el._countUpOrigInnerHTML = el.innerHTML
 
 	// Start counting.
-	el.innerHTML = nums[ 0 ]
+	el.innerHTML = nums[ 0 ] || '&nbsp;' // Use a non-breaking space to prevent layout shift.
 	el.style.visibility = 'visible'
 
 	// Function for displaying output with the set time and delay.
 	const output = function() {
-		el.innerHTML = nums.shift()
+		el.innerHTML = nums.shift() || '&nbsp;' // Use a non-breaking space to prevent layout shift.
 		if ( nums.length ) {
 			clearTimeout( el.countUpTimeout )
 			el.countUpTimeout = setTimeout( output, delay )
