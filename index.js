@@ -1,4 +1,4 @@
-const counterUp = ( el, options = {} ) => {
+export const counterUp = ( el, options = {} ) => {
 	const {
 		action = 'start',
 		duration = 1000,

@@ -2,11 +2,13 @@
 
 [![Build Status](https://travis-ci.org/bfintal/Counter-Up2.svg?branch=master)](https://travis-ci.org/bfintal/Counter-Up2)
 
-Counter-Up is a lightweight module with zero dependencies that counts up to a targeted number when the number becomes visible.
+![Counter-Up2 demo gif](https://bfintal.github.io/Counter-Up2/sample.gif)
 
-An improvement to https://github.com/bfintal/Counter-Up
+Example Pen: https://codepen.io/bfintal/pen/zYzOGpZ
 
-### What Can You Count Up?
+Counter-Up is a lightweight (only 1.3kb gzipped) module with zero dependencies that counts up to a targeted number when the number becomes visible.
+
+## What Can You Count Up?
 
 * Floats: `1.234`
 * Integers: `1234`
@@ -15,7 +17,8 @@ An improvement to https://github.com/bfintal/Counter-Up
 * With non-numeric characters: `$1,234.56`
 * Multiple countable values: `604,800 seconds in 10,080 minutes in 168 hours in 7 days`
 
-### Usage
+## Usage
+### Usage as Module
 
 **Install**
 ```bash
@@ -50,7 +53,62 @@ If you want to stop the counter immediately:
 counterUp( el, { action: 'stop' } )
 ```
 
-### Use with Waypoints
+### Usage in Browser
+
+Example Pen: https://codepen.io/bfintal/pen/zYzOGpZ
+
+**HTML**
+
+```html
+<script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
+
+<div class="counter">1,123,456.78</div>
+```
+
+**JS**
+```js
+const { counterUp } = window.counterUp
+
+const el = document.querySelector( '.counter' )
+
+// Start counting, typically you need to call this when the 
+// element becomes visible, or whenever you like.
+counterUp( el, {
+    duration: 5000,
+    delay: 16,
+} )
+```
+
+**CDN**
+* https://unpkg.com/counterup2@2.0.2/dist/index.js
+
+## Triggering the Counter
+
+It is up to you to perform the triggering on when to start the count up. Here are some common ways on how to do it:
+### Trigger when the element becomes visible with Intersection Observer
+
+Example Pen: https://codepen.io/bfintal/pen/zYzOGpZ
+
+```js
+const callback = entries => {
+	entries.forEach( entry => {
+		const el = entry.target
+		if ( entry.isIntersecting ) ) {
+			counterUp( el, {
+				duration: 2000,
+				delay: 16,
+			} )
+		}
+	} )
+}
+
+const IO = new IntersectionObserver( callback, { threshold: 1 } )
+
+const el = document.querySelector( '.counter' )
+IO.observe( el )
+```
+
+### Trigger when the element becomes visible with Waypoints
 
 The counting is performed when `counterUp` is called. To make the counting start when the element becomes visible, use a visibility library like [Waypoints](https://www.npmjs.com/package/waypoints)
 
@@ -69,3 +127,6 @@ new Waypoint( {
     offset: 'bottom-in-view',
 } )
 ```
+
+### Footnotes
+An improvement to https://github.com/bfintal/Counter-Up
