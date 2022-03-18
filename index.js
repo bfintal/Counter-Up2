@@ -100,7 +100,7 @@ export const divideNumbers = ( numToDivide, options = {} ) => {
 				// Re-insert the symbols in the indices they were at.
 				newNum = symbols.reduce( ( num, { char, i } ) => {
 					return num.length <= i ? num // If we don't have enough numbers, don't insert the symbol.
-						: num.slice( 0, -i ) + char + num.slice( -i )
+						: num.slice( 0, -i ) + (char ?? '') + num.slice( -i ) // Replace char for an empty string in case it's not defined.
 				}, newNum.toString() )
 
 				// Insert all small numbers.
