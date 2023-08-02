@@ -67,7 +67,7 @@ Example Pen: https://codepen.io/bfintal/pen/zYzOGpZ
 
 **JS**
 ```js
-const { counterUp } = window.counterUp
+const counterUp = window.counterUp.default
 
 const el = document.querySelector( '.counter' )
 
